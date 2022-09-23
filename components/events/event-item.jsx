@@ -1,6 +1,9 @@
 import React from 'react';
-import Link from 'next/link';
-import styles from './event-item.module.css'
+import styles from './event-item.module.css';
+import Button from '../ui/button';
+import DateIcon from '../icons/date-icon';
+import AddressIcon from '../icons/address-icon';
+import ArrowRightIcon from '../icons/arrow-right-icon';
 
 function EventItem(props) {
   const { id, title, image, location } = props;
@@ -10,22 +13,29 @@ function EventItem(props) {
     year: 'numeric',
   });
   const address = location.replace(', ', '\n');
-  const exploreLink = `events/${id}`  
+  const exploreLink = `events/${id}`;
 
   return (
     <li className={styles.item}>
       <img src={'/' + image} alt={title} />
-      <div>
-        <div className={styles.content}>
+      <div className={styles.content}>
+        <div className={styles.summary}>
           <h2>{title}</h2>
-          <div>
-            <time className={styles.date}>{date}</time>
+          <div className={styles.date}>
+            <DateIcon />
+            <time>{date}</time>
           </div>
-          <div>
-            <address className={styles.address}>{address}</address>
+          <div className={styles.address}>
+            <AddressIcon />
+            <address>{address}</address>
           </div>
           <div className={styles.actions}>
-            <Link href={exploreLink}>Explore Events</Link>
+            <Button link={exploreLink}>
+              <span>Explore Events</span>
+              <span className={styles.icon}>
+                <ArrowRightIcon />
+              </span>
+            </Button>
           </div>
         </div>
       </div>
