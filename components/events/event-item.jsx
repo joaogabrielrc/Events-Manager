@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import styles from './event-item.module.css'
 
 function EventItem(props) {
   const { id, title, image, location } = props;
@@ -9,21 +10,21 @@ function EventItem(props) {
     year: 'numeric',
   });
   const address = location.replace(', ', '\n');
-  const exploreLink = `events/${id}`
+  const exploreLink = `events/${id}`  
 
   return (
-    <li>
+    <li className={styles.item}>
       <img src={'/' + image} alt={title} />
       <div>
-        <div>
+        <div className={styles.content}>
           <h2>{title}</h2>
           <div>
-            <time>{date}</time>
+            <time className={styles.date}>{date}</time>
           </div>
           <div>
-            <address>{address}</address>
+            <address className={styles.address}>{address}</address>
           </div>
-          <div>
+          <div className={styles.actions}>
             <Link href={exploreLink}>Explore Events</Link>
           </div>
         </div>
