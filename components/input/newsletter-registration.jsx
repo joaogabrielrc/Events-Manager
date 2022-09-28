@@ -4,7 +4,7 @@ import styles from './newsletter-registration.module.css';
 function NewsletterRegistration() {
   const emailInputRef = useRef();
 
-  const registrationHandler = async event => {
+  const registrationHandler = event => {
     event.preventDefault();
 
     const email = emailInputRef.current.value;
@@ -14,16 +14,13 @@ function NewsletterRegistration() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(email),
+      body: JSON.stringify({ email }),
     };
 
-    const response = await fetch(
+    fetch(
       '/api/v1/newsletter',
       requestOptions
-    );
-    const data = await response.json();
-
-    console.log(data);
+    ); 
   };
 
   return (

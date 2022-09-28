@@ -1,4 +1,6 @@
-function handler(request, response) {
+import prismaClient from '../../../src/database/connect';
+
+async function handler(request, response) {
   try {
     if (request.method === 'POST') {
       const { email } = request.body;
@@ -25,7 +27,22 @@ function handler(request, response) {
           .json(badRequest.message);
       }
 
-      return response.status(201).json({ email });
+      let data = {};
+
+      try {
+        data = await prismaClient.email.create({
+          data: { email },
+        });
+      } catch (error) {        
+        if (error.code === 'P2002') {
+          return response
+            .status(400)
+            .json({ message: 'email already exists' });
+        }
+        throw new Error(error);
+      }
+
+      return response.status(201).json(data);
     } else {
       return response.status(405).json('Method Not Allowed');
     }
