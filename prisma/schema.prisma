@@ -8,10 +8,24 @@ generator client {
 }
 
 model Email {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  email      String    @unique
+  updated_at DateTime  @updatedAt
+  created_at DateTime  @default(now())
+  comments   Comment[]
+
+  @@map("emails")
+}
+
+model Comment {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  email      String   @unique
+  email      Email    @relation(fields: [emailId], references: [id])
+  emailId    String   @db.ObjectId
+  name       String
+  text       String
+  eventId    String   
   updated_at DateTime @updatedAt
   created_at DateTime @default(now())
 
-  @@map("emails")
+  @@map("comments")
 }

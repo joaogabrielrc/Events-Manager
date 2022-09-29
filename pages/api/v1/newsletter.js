@@ -1,4 +1,4 @@
-import prismaClient from '../../../src/database/connect';
+import prisma from '../../../src/database/connect';
 
 async function handler(request, response) {
   try {
@@ -30,7 +30,7 @@ async function handler(request, response) {
       let data = {};
 
       try {
-        data = await prismaClient.email.create({
+        data = await prisma.email.create({
           data: { email },
         });
       } catch (error) {        

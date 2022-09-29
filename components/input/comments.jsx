@@ -10,7 +10,7 @@ function Comments(props) {
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState([]);
 
-  useEffect(() => {    
+  useEffect(() => {
     fetch(`/api/v1/events/${eventId}/comments`)
       .then(response => response.json())
       .then(data => setComments(data));
@@ -29,9 +29,7 @@ function Comments(props) {
       body: JSON.stringify(commentData),
     };
 
-    fetch(`/api/v1/events/${eventId}/comments`, requestOptions)
-      .then(response => response.json())
-      .then(data => {});
+    fetch(`/api/v1/events/${eventId}/comments`, requestOptions);      
   };
 
   return (

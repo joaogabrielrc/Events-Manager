@@ -1,22 +1,14 @@
-import { v4 as uuidv4 } from 'uuid';
+import prisma from '../../../../../src/database/connect';
 
-function handler(request, response) {
+async function handler(request, response) {
+  const { eventId } = request.query;
+
   try {
     if (request.method === 'GET') {
-      const dummyData = [
-        {
-          id: uuidv4(),
-          name: 'Max',
-          text: 'A first comment.',
-        },
-        {
-          id: uuidv4(),
-          name: 'John',
-          text: 'Very nice!',
-        },
-      ];
-
-      return response.status(200).json(dummyData);
+      const data = await prisma.comment.findMany({
+        where: { eventId },
+      });
+      return response.status(200).json(data);
     }
 
     if (request.method === 'POST') {
@@ -54,14 +46,30 @@ function handler(request, response) {
           .json(badRequest.message);
       }
 
-      const comment = {
-        id: uuidv4(),
-        email,
+      const emailInstance = await prisma.email.findUnique({
+        where: { email },
+      });
+
+      if (!emailInstance) {
+        return response
+          .status(400)
+          .json({ message: 'email does not exists' });
+      }
+
+      const commentData = {
+        email: {
+          connect: { id: emailInstance.id },
+        },
         name,
         text,
+        eventId,
       };
 
-      return response.status(201).json(comment);
+      const data = await prisma.comment.create({
+        data: commentData,
+      });
+
+      return response.status(201).json(data);
     }
 
     return response.status(405).json('Method Not Allowed');
