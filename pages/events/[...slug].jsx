@@ -2,10 +2,10 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 
-import EventList from '../../components/events/event-list';
-import ResultsTitle from '../../components/events/results-title';
-import Button from '../../components/ui/button';
-import ErrorAlert from '../../components/ui/error-alert';
+import EventList from '../../client/components/events/event-list';
+import ResultsTitle from '../../client/components/events/results-title';
+import Button from '../../client/components/ui/button';
+import ErrorAlert from '../../client/components/ui/error-alert';
 
 function FilteredEventsPage() {
   const [loadedEvents, setLoadedEvents] = useState([]);

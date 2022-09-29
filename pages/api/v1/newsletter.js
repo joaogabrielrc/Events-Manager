@@ -1,4 +1,4 @@
-import prisma from '../../../src/database/connect';
+import prisma from '../../../server/database/connect';
 
 async function handler(request, response) {
   try {

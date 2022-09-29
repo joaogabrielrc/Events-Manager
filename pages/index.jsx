@@ -1,9 +1,9 @@
 import React from 'react';
 import Head from 'next/head';
 
-import EventList from '../components/events/event-list';
-import { getFeaturedEvents } from '../helpers/api-util';
-import NewsletterRegistration from '../components/input/newsletter-registration';
+import EventList from '../client/components/events/event-list';
+import { getFeaturedEvents } from '../client/helpers/api-util';
+import NewsletterRegistration from '../client/components/input/newsletter-registration';
 
 function HomePage(props) {
   return (

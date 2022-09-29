@@ -4,12 +4,12 @@ import Head from 'next/head';
 import {
   getEventById,
   getFeaturedEvents,
-} from '../../helpers/api-util';
-import EventSummary from '../../components/event-detail/event-summary';
-import EventLogistics from '../../components/event-detail/event-logistics';
-import EventContent from '../../components/event-detail/event-content';
-import ErrorAlert from '../../components/ui/error-alert';
-import Comments from '../../components/input/comments';
+} from '../../client/helpers/api-util';
+import EventSummary from '../../client/components/event-detail/event-summary';
+import EventLogistics from '../../client/components/event-detail/event-logistics';
+import EventContent from '../../client/components/event-detail/event-content';
+import ErrorAlert from '../../client/components/ui/error-alert';
+import Comments from '../../client/components/input/comments';
 
 function EventDetailPage(props) {
   const { event } = props;
