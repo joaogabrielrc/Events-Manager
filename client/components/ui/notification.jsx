@@ -4,7 +4,7 @@ import styles from './notification.module.css';
 import NotificationContext from '../../store/notification-context';
 
 function Notification(props) {
-  const notificationCtx = useContext(NotificationContext);
+  const notificationContext = useContext(NotificationContext);
 
   const { title, message, status } = props;
 
@@ -27,7 +27,7 @@ function Notification(props) {
   return (
     <div
       className={activeClasses}
-      onClick={notificationCtx.hideNotification}
+      onClick={notificationContext.hideNotification}
     >
       <h2>{title}</h2>
       <p>{message}</p>
